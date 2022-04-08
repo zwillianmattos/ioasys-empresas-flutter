@@ -13,7 +13,7 @@ class _AppWidgetState extends State<AppWidget> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Ioasys',
+      title: 'Ioasys Empresas',
       debugShowCheckedModeBanner: false,
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
