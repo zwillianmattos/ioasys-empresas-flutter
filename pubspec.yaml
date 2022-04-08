@@ -16,7 +16,6 @@ dependencies:
   flutter_mobx: ^2.0.4
   mobx: ^2.0.6+1
   dio: ^4.0.6
-  flutter_svg: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -33,6 +32,6 @@ flutter:
 
   assets:
     - assets/
-    - assets/images/logo/logo.png
+    - assets/images/logo.png
     - assets/images/background.png
-    - assets/images/logo-markdown.svg
+    - assets/images/logo-markdown.png
