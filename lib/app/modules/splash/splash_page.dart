@@ -8,6 +8,9 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  double opacity = 1;
+  bool startAnim = false;
+
   @override
   void initState() {
     super.initState();
@@ -16,8 +19,13 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   _delayLoading() async {
+    await Future.delayed(const Duration(seconds: 1));
+    setState(() {
+      opacity = 0;
+      startAnim = true;
+    });
     // TODO: Check if user is logged in and redirect to home page or login page
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     Navigator.of(context).pushReplacementNamed('/users/auth/sign_in');
   }
 
@@ -31,11 +39,24 @@ class _SplashPageState extends State<SplashPage> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Center(
-          child: Image.asset(
-            "assets/images/logo.png",
-            scale: 1.5,
-          ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            AnimatedPositioned(
+              bottom: MediaQuery.of(context).size.height / 3,
+              top: 0,
+              duration: const Duration(seconds: 3),
+              curve: Curves.easeOut,
+              child: AnimatedOpacity(
+                duration: const Duration(seconds: 1),
+                opacity: opacity,
+                child: Image.asset(
+                  "assets/images/logo.png",
+                  scale: 1.5,
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );
