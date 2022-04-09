@@ -10,14 +10,14 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _delayLoading();
   }
 
   _delayLoading() async {
-    await Future.delayed(Duration(seconds: 3));
+    // TODO: Check if user is logged in and redirect to home page or login page
+    await Future.delayed(Duration(seconds: 2));
     Navigator.of(context).pushReplacementNamed('/users/auth/sign_in');
   }
 
@@ -32,7 +32,10 @@ class _SplashPageState extends State<SplashPage> {
           ),
         ),
         child: Center(
-          child: Image.asset("assets/images/logo.png", scale: 1.5,),
+          child: Image.asset(
+            "assets/images/logo.png",
+            scale: 1.5,
+          ),
         ),
       ),
     );

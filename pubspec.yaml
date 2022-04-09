@@ -16,6 +16,7 @@ dependencies:
   flutter_mobx: ^2.0.4
   mobx: ^2.0.6+1
   dio: ^4.0.6
+  google_fonts: ^2.3.1
 
 dev_dependencies:
   flutter_test:
@@ -27,11 +28,28 @@ dev_dependencies:
   modular_codegen: ^3.0.2
 
 flutter:
-
   uses-material-design: true
-
   assets:
+    - google_fonts/
+    - fonts/
     - assets/
     - assets/images/logo.png
     - assets/images/background.png
     - assets/images/logo-markdown.png
+    - assets/images/loading.gif
+    - assets/images/not-found.png
+
+  fonts:
+    - family: Gilroy
+      fonts:
+        - asset: fonts/Gilroy-ExtraBold.otf
+    - family: Gilroy Light
+      fonts:
+        - asset: fonts/Gilroy-Light.otf
+vars:
+  clean: flutter clean
+  get: flutter pub get
+  runner: flutter pub run build_runner
+scripts:
+  mobx_build: $clean & $get & $runner build --delete-conflicting-outputs
+  mobx_watch: $clean & $get & $runner watch --delete-conflicting-outputs
