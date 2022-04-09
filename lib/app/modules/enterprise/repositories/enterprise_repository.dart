@@ -1,12 +1,8 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:ioasys_empresas_flutter/app/core/store/auth_store.dart';
 import 'package:ioasys_empresas_flutter/app/core/utils/api_response.dart';
 import 'package:ioasys_empresas_flutter/app/modules/enterprise/models/enterprise_model.dart';
-import 'package:ioasys_empresas_flutter/app/modules/users/auth/sign_in/model/investor_model.dart';
-import 'package:ioasys_empresas_flutter/app/modules/users/auth/sign_in/model/sign_in_model.dart';
 
 class EnterpriseRepository extends Disposable {
   final Dio http;
@@ -18,7 +14,6 @@ class EnterpriseRepository extends Disposable {
       final response = await http.get("enterprises/$id",
           options: Modular.get<AuthStore>().authHeader);
       if (response != null) {
-
         return ApiResponse(
           success: true,
           data: EnterpriseModel.fromJson(response.data['enterprise']),
@@ -27,18 +22,16 @@ class EnterpriseRepository extends Disposable {
       }
     } on DioError catch (e) {
       if (e.response != null) {
-        print(e.response!.data);
-        print(e.response!.headers);
-        print(e.response!.requestOptions);
-
+        // Token expirado ou inválido faça o refresh token
+        // Como não temos o refresh token, vamos simplesmente forcar o logout
+        if (e.response?.statusCode == 401) {
+          Modular.get<AuthStore>().clearStore();
+        }
         return ApiResponse(
           success: false,
           errors: e.response!.data['errors'].cast<String>(),
         );
       } else {
-        // Something happened in setting up or sending the request that triggered an Error
-        print(e.requestOptions.data);
-        print(e.message);
         return ApiResponse(
           success: false,
           errors: ["Não foi possível realizar a requisição"],
@@ -64,18 +57,16 @@ class EnterpriseRepository extends Disposable {
       }
     } on DioError catch (e) {
       if (e.response != null) {
-        print(e.response!.data);
-        print(e.response!.headers);
-        print(e.response!.requestOptions);
-
+        // Token expirado ou inválido faça o refresh token
+        // Como não temos o refresh token, vamos simplesmente forcar o logout
+        if (e.response?.statusCode == 401) {
+          Modular.get<AuthStore>().clearStore();
+        }
         return ApiResponse(
           success: false,
           errors: e.response!.data['errors'].cast<String>(),
         );
       } else {
-        // Something happened in setting up or sending the request that triggered an Error
-        print(e.requestOptions.data);
-        print(e.message);
         return ApiResponse(
           success: false,
           errors: ["Não foi possível realizar a requisição"],

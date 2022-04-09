@@ -25,14 +25,11 @@ abstract class _EnterpriseDetailBase with Store {
   details() async {
     try {
       isLoading = true;
-
-      print(Modular.args.params);
       String id = Modular.args.params['id'];
       ApiResponse? response = await repository.detail(id);
       if (response != null) {
         enterprise = response.data as EnterpriseModel;
       }
-      print(response?.data);
     } catch (e) {
       print(e);
     } finally {

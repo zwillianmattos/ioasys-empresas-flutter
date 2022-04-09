@@ -30,6 +30,7 @@ abstract class _EnterpriseBase with Store {
 
   _EnterpriseBase(this.repository) {
     _initListeners();
+    search();
   }
 
   @action
@@ -49,10 +50,8 @@ abstract class _EnterpriseBase with Store {
     try {
       searchResults.clear();
       if (_searchText.isNotEmpty || _searchText != "") {
-        print(_searchText);
         isLoading = true;
         ApiResponse? response = await repository.search(_searchText);
-        print(response?.data);
         if (response != null) {
           searchResults.addAll(response.data as List<EnterpriseModel>);
         }

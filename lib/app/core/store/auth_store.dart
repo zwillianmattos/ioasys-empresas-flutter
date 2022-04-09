@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:ioasys_empresas_flutter/app/modules/users/auth/sign_in/model/investor_model.dart';
 import 'package:mobx/mobx.dart';
 
@@ -17,11 +18,16 @@ abstract class _AuthStoreBase with Store {
   void storeUser(InvestorModel investorModel, dynamic headers) {
     this.investorModel = investorModel;
     this.headers = headers;
+
+    // TODO: Save user in local storage
   }
 
-  clearStore(){
+  @action
+  void clearStore() {
     this.investorModel = null;
     this.headers = null;
+
+    Modular.to.pushReplacementNamed('/');
   }
 
   @computed
@@ -36,6 +42,5 @@ abstract class _AuthStoreBase with Store {
       'client': this.headers['client'].first,
       'uid': this.headers['uid'].first,
     });
-    
   }
 }

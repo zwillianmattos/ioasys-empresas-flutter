@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:ioasys_empresas_flutter/app/modules/users/users_module.dart';
+import 'core/constants/env.dart';
 import 'core/store/auth_store.dart';
 import 'modules/enterprise/enterprise_module.dart';
 import 'modules/splash/splash_page.dart';
@@ -10,7 +11,7 @@ class AppModule extends Module {
     BindInject(
       (i) => Dio(
         BaseOptions(
-          baseUrl: "https://empresas.ioasys.com.br/api/v1/",
+          baseUrl: API_ENDPOINT,
         ),
       ),
     ),

@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:ioasys_empresas_flutter/app/core/store/auth_store.dart';
 import 'package:ioasys_empresas_flutter/app/core/utils/api_response.dart';
+import 'package:ioasys_empresas_flutter/app/modules/users/auth/sign_in/model/investor_model.dart';
 import 'package:ioasys_empresas_flutter/app/modules/users/auth/sign_in/model/sign_in_model.dart';
 import 'package:ioasys_empresas_flutter/app/modules/users/auth/sign_in/repositories/sign_in_repository.dart';
 import 'package:mobx/mobx.dart';
-
-import 'model/investor_model.dart';
 
 part 'sign_in_store.g.dart';
 
@@ -29,6 +28,9 @@ abstract class _SignInStoreBase with Store {
   @observable
   bool isLoading = false;
 
+  @computed
+  bool get isLoadingForm => isLoading;
+
   _SignInStoreBase(this.repository) {}
 
   Future<dynamic> auth() async {
@@ -36,7 +38,7 @@ abstract class _SignInStoreBase with Store {
       isLoading = true;
       
       if (!formKey.currentState!.validate()) {
-        throw ("Erro ao validar formulario");
+        throw ("Verifique os campos do formulário");
       }
 
       formKey.currentState!.save();
@@ -56,7 +58,8 @@ abstract class _SignInStoreBase with Store {
         }
       }
     } catch (e) {
-      print(e);
+      errors.clear();
+      errors.add(e.toString());
       isLoading = false;
     }
   }

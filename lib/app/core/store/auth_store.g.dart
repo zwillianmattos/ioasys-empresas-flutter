@@ -62,6 +62,17 @@ mixin _$AuthStore on _AuthStoreBase, Store {
   }
 
   @override
+  void clearStore() {
+    final _$actionInfo = _$_AuthStoreBaseActionController.startAction(
+        name: '_AuthStoreBase.clearStore');
+    try {
+      return super.clearStore();
+    } finally {
+      _$_AuthStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 investorModel: ${investorModel},

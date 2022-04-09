@@ -28,18 +28,11 @@ class SignInRepository extends Disposable {
       );
     } on DioError catch (e) {
       if (e.response != null) {
-        print(e.response!.data);
-        print(e.response!.headers);
-        print(e.response!.requestOptions);
-
         return ApiResponse(
           success: false,
           errors: e.response!.data['errors'].cast<String>(),
         );
       } else {
-        // Something happened in setting up or sending the request that triggered an Error
-        print(e.requestOptions.data);
-        print(e.message);
         return ApiResponse(
           success: false,
           errors: ["Não foi possível realizar a requisição"],

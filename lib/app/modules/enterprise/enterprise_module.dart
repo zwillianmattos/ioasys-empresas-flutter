@@ -1,12 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:ioasys_empresas_flutter/app/core/store/auth_store.dart';
-import 'package:ioasys_empresas_flutter/app/modules/enterprise/enterprise_page.dart';
 import 'package:ioasys_empresas_flutter/app/modules/enterprise/repositories/enterprise_repository.dart';
 
-import 'enterprise_detail_page.dart';
-import 'enterprise_detail_store.dart';
-import 'enterprise_store.dart';
+import 'pages/detail/enterprise_detail_page.dart';
+import 'pages/detail/enterprise_detail_store.dart';
+import 'pages/home/enterprise_page.dart';
+import 'pages/home/enterprise_store.dart';
 
 class EnterpriseModule extends Module {
   final List<Bind> binds = [
